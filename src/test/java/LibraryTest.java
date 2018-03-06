@@ -47,19 +47,33 @@ public class LibraryTest {
         assertEquals(1, borrower.numberOfBorrowedBooks());
     }
 
+//    @Test
+//    public void genreCountInitialisesAt0() {
+//        library.generateGenreCount();
+//        assertEquals(0, library.getNumberOfGenre(Genre.GENERAL));
+//    }
+
     @Test
-    public void genreCountInitialisesAt0() {
-        library.generateGenreCount();
+    public void oneAddedToGenreCount() {
+        library.addBook(theColourPurple);
+        assertEquals(1, library.getNumberOfGenre(Genre.GENERAL));
+    }
+
+    @Test
+    public void borrowingReducesGenre() {
+        library.addBook(theColourPurple);
+        assertEquals(1, library.getNumberOfGenre(Genre.GENERAL));
+        library.lend(theColourPurple, borrower);
         assertEquals(0, library.getNumberOfGenre(Genre.GENERAL));
+
     }
 
-
-    @Test
-    public void countNumberOfGeneralNovels() {
-        for (int i = 0; i<5; i++ ) {
-            library.addBook(theColourPurple);
-        }
-        library.generateGenreCount();
-        assertEquals(5, library.getNumberOfGenre(Genre.GENERAL));
-    }
+//    @Test
+//    public void countNumberOfGeneralNovels() {
+//        for (int i = 0; i<5; i++ ) {
+//            library.addBook(theColourPurple);
+//        }
+//        library.generateGenreCount();
+//        assertEquals(5, library.getNumberOfGenre(Genre.GENERAL));
+//    }
 }

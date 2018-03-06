@@ -18,7 +18,7 @@ public class Library {
     public void addBook(Book book) {
         if (this.books.size() < this.capacity) {
             this.books.add(book);
-
+            addToGenreCount(book.getGenre());
         }
     }
 
@@ -37,19 +37,32 @@ public class Library {
     public void lend(Book book, Borrower borrower) {
         if (books.remove(book)) {
             borrower.borrow(book);
+            removeFromGenreCount(book.getGenre());
         }
     }
-    public void initializeGenreCount() {
+    private void initializeGenreCount() {
         for (Genre g : Genre.values()) {
             genreCount.put(g, 0);
         }
     }
 
-    public void generateGenreCount() {
-        for (Book book : this.books) {
-            int newCount = genreCount.get(book.getGenre());
-            newCount += 1;
-            genreCount.put(book.getGenre(), newCount);
-        }
+    public void addToGenreCount(Genre genre) {
+        int newCount = genreCount.get(genre);
+        newCount += 1;
+        genreCount.put(genre, newCount);
     }
+
+    public void removeFromGenreCount(Genre genre) {
+        int newCount = genreCount.get(genre);
+        newCount -= 1;
+        genreCount.put(genre, newCount);
+    }
+
+//    public void generateGenreCount() {
+//        for (Book book : this.books) {
+//            int newCount = genreCount.get(book.getGenre());
+//            newCount += 1;
+//            genreCount.put(book.getGenre(), newCount);
+//        }
+//    }
 }
